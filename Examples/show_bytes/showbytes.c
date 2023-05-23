@@ -55,18 +55,22 @@ void show_pointer(void *x)
     show_bytes((byte_pointer) &x, sizeof(void *));
 }
 
+void test_show_bytes(int val)
+{
+    int ival = val;
+    long lval = (long)ival;
+    float fval = (float)ival;
+    int *pval = &ival;
+    show_int(ival);
+    show_long(lval);
+    show_float(fval);
+    show_pointer(pval);
+}
+
 int main()
 {
 
-    show_int(255);
-    show_long(255);
-    show_float(255.0);
-    show_double(255.0);
-    
-    int var = 255;
-    int *ptr;
-    ptr = &var;
-    show_pointer(ptr);
+    test_show_bytes(255);
 
     return 0;
 }
