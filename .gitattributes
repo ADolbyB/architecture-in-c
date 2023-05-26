@@ -1,0 +1,2 @@
+# Classify .c as C files:
+*.c linguist-language=C
