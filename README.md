@@ -2,6 +2,10 @@
 
 A Collection of Code from CDA-4102: Computer Architecture.
 
+## Sources:
+
+[Unix Processes in C](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY) YouTube Playlist.
+
 The book following this course is [Computer Systems: A Programmer's Perspective, 3/E](http://csapp.cs.cmu.edu/)
  - This book uses programming in C language for assignments.
 
