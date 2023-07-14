@@ -2,7 +2,7 @@
  * Joel Brigida
  * CDA 4102: Computer Architecture
  * Pipelining, Forks & Parallel Processing:
- * June 13, 2023 Lecture 1-4: For & While Loop Review
+ * June 13, 2023 Lecture 1-5: Pointers in C
  * 
  * C_PLACEHOLDERS:
  * %d - int (same as %i)
@@ -18,24 +18,15 @@
 
 int main()
 {
-    int i, j;
+    int x = 42;     // Declare & Initialize an integer variable
+    int *xPtr;      // Declare an integer pointer.
+    xPtr = &x;      // Assign address of int 'x' to int* 'xPtr'
 
-    // for() loop
-    printf("Using for() loop:\n");
-    for(i = 1; i <= 5; i++)
-    {
-        printf("Iteration %d\n", i);
-    }
-    printf("\n");
-
-    // While Loop
-    printf("Using while loop:\n");
-    j = 1;
-    while(j <= 5)
-    {
-        printf("Iteration %d\n", j);
-        j++;
-    }
+    printf("Value of x: %d\n", x);
+    printf("Address of x: %p\n", &x);
+    printf("Address pointed to: %p\n", xPtr);
+    printf("Address of pointer: %p\n", &xPtr);
+    printf("Dereferencing xPtr: %d\n", *xPtr);
 
     return 0;
 }
