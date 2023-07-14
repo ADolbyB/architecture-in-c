@@ -2,7 +2,7 @@
  * Joel Brigida
  * CDA 4102: Computer Architecture
  * Pipelining, Forks & Parallel Processing:
- * June 13, 2023 Lecture 1-1: Input & Output Operations in C.
+ * June 13, 2023 Lecture 1-1: C Placeholders Review.
  * 
  * C_PLACEHOLDERS:
  * %d - int (same as %i)
