@@ -5,25 +5,17 @@
  * June 13, 2023 Lecture 2-3: Visualizing fork().
  * 2 forks create 4 processes, each one prints "Hello World".
  * 
- * C_PLACEHOLDERS:
- * %d - int (same as %i)
- * %ld - long int (same as %li)
- * %f - float
- * %lf, %g - double (long float)
- * %c - char
- * %s - string
- * %x - hexadecimal
- * %p - address
+ * Note that 'n' calls to fork() will result in 2^n total processes executing after the last call.
 */
 
 #include <stdio.h>
-#include <unistd.h>         // Unix processes in C
+#include <unistd.h>                     // Unix processes in C
 
 int main()
 {
-    int id1 = fork();
-    int id2 = fork();
-    printf("Hello World!\n");
+    int id1 = fork();                   // fork() creates 1 child process (2 total)
+    int id2 = fork();                   // 2nd fork() forks the now 2 existing child processes (4 total now)
+    printf("Hello World!\n");           // All 4 processes execute the "Hello World" printf statement.
     sleep(1);
 
     return 0;
