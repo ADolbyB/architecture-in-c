@@ -21,6 +21,12 @@
 
 int main()
 {
+    /*** 
+     * fork() call creates a parallel child process running in tandem with the `main` process, 
+     * executing in parallel beside the `main` parent which called it.
+     * Therefore: we get 2 "Hello World"s
+    */
+
     fork();
     printf("Hello World\n");
 
