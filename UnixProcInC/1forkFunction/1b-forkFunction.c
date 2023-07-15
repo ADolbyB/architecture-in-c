@@ -15,10 +15,8 @@ int processCnt;;
 
 int main(int argc, char* argv[])
 {
-    processCnt = 0;
     int pid;
     pid = fork();                                   // fork the main() process => 2 processes..
-    //processCnt++;                                 // do both forks increment the counter?
     
     // Note that 2 different pids from the printf statement are shown
     // Child process (the 'new process' we just created) will always be '0'
@@ -40,9 +38,6 @@ int main(int argc, char* argv[])
     // 3 processes run the "Hello World from pid: %d\n" printf() statement.
     // Therefore the statement prints 3 times upon code execution.
     printf("MAIN: Hello from pid: %d\n", pid);
-    printf("How many processes were running?  ");   // Oh well: this will print a bunch of times.
-    processCnt = processCnt + 1;                    // Can't remember if C has the '++' shortcut, lol.
-    printf("%d\n", processCnt);
 
     return 0;
 }
