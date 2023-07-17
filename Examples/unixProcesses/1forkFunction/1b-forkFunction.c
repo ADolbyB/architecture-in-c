@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int processCnt;;
+int processCnt;
 
 int main(int argc, char* argv[])
 {
