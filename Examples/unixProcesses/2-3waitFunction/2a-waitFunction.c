@@ -11,7 +11,7 @@
  *  a bunch of items are printed to it quickly, it will wait and fill some of the buffer,
  *  then print it to the screen.
  * 
- * wait(): tells the main process to wait at that step until the child process has finished executing that line.
+ * wait(): tells the main process to wait at that step until the child process has finished executing to the END.
  * 
 */
 
@@ -23,7 +23,7 @@
 int main(int argc, char* argv[])
 {
     int pid, i, n;                          // n = numbers 1 through 10 for counting / displaying to user.
-    pid = fork();
+    pid = fork();                           // clone & allocate new memory to an identical child process and run it
 
     if(pid == 0)                            // Child process prints 1 - 5
     {
@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 
     if(pid != 0)                            // Tell the main process to wait until child process prints '1 - 5'
     {
-        wait();                             // This function helps order the execution of processes
+        wait();                             // Main: wait until the child process finishes. This function helps order the execution of processes
     }
 
     for(i = n; i < (n + 5); i++)
@@ -49,7 +49,6 @@ int main(int argc, char* argv[])
     {
         printf("\n\n");
     }
-    
 
     return 0;
 }
