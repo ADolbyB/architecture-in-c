@@ -27,7 +27,7 @@ int main()
     fPtr = fopen("../assets/JB1.txt","r");                          // Open file in read mode
     if(fPtr)                                                        // If file exists: if(fPtr != NULL)
     { 
-        while(!feof(fPtr)) 
+        while(!feof(fPtr))                                          // while EOF has not been reached by fPtr
         { 
             fgets(buf, sizeof(buf), fPtr); 
             puts(buf);                                              // something inserts an extra '\n' at the terminal printout
