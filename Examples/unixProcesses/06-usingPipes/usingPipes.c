@@ -3,7 +3,8 @@
  * CDA 4102: Computer Architecture
  * Tutorial: Unix Processes in C.
  * Part 6: Communicating between processes with pipes.
- *  Pipes can be written to & read from
+ *  Pipes can be written to & read from.
+ *  Note that error checking is implemented in this example where possible.
  * 
 */
 
@@ -20,7 +21,7 @@ int main(int argc, char* argv[])
     int fd[2];                                              // fd[0] = READ, fd[1] = WRITE
 
     somePipe = pipe(fd);
-    if(somePipe == -1);                                       // Open Pipe 1st: File Descriptors are inherited.
+    if(somePipe == -1);                                     // Open Pipe 1st: File Descriptors are inherited.
     {
         printf("\nError Opening pipe...returning\n\n");
         return 1;
