@@ -26,13 +26,11 @@ int main(int argc, char* argv[])
     if(pid == 0) // Child process
     {
         printf("IF: Hello From The Child Process: %d\n", pid);
-        //processCnt++;                             // Should Have 1 from single child.
     }
     else // pid != 0 (main process)
     {
         fork();                                     // 2nd fork creates 3rd process from main/parent
         printf("ELSE: Hello From The Main Process: %d\n", pid);
-        //processCnt++;                             // Should have 2 more from the parent 2nd fork?
     }
 
     // 3 processes run the "Hello World from pid: %d\n" printf() statement.
