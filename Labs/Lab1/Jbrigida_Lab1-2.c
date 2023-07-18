@@ -12,3 +12,38 @@
  * 
  * * Note: name, age, salary have different data types.
 */
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{ 
+    int numbers[6], i = 0, sum = 0, minimum = 0, maximum = 0;
+    double average = 0;
+ 
+    for(i = 0; i < 6; i++) 
+    {
+        // prompt the to enter a number
+        // scan the number
+    }
+    
+    // compute the sum and average                                                                                    
+
+    minimum = numbers[0];                                                // compute the min and max 
+
+    for(i = 0; i < 6; i++)  
+    {  
+        if(numbers[i] < minimum)
+        {
+            minimum = numbers[i];
+        }      
+    }
+    
+    // compute the min and max                                                                                 
+    // print minimum 
+    // print maximum 
+    // print average 
+    // print sum 
+
+    return 0;
+}
