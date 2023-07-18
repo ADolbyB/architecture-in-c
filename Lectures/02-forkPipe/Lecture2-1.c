@@ -11,8 +11,12 @@
  * %lf, %g - double (long float)
  * %c - char
  * %s - string
- * %x - hexadecimal
- * %p - address
+ * %x - hexadecimal: 0x123A
+ * %o - octal
+ * %e - scientific notation: 1.2e13
+ * %E - scientific notation: 1.2E13
+ * %p - memory addresses: a POINTER to a memory address location
+ * %% - when you actually need the % sign shown in output :)
 */
 
 #include <stdio.h>
