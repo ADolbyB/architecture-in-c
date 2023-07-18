@@ -17,16 +17,14 @@
 
 int main(int argc, char* argv[])
 {
-    int id, somePipe;
-    int fd[2];                                              // fd[0] = READ, fd[1] = WRITE
-
-    somePipe = pipe(fd);
-    if(somePipe == -1);                                     // Open Pipe 1st: File Descriptors are inherited.
+    int fd[2];                                              // fd[0] = read, fd[1] = write;
+    if(pipe(fd) == -1)
     {
-        printf("\nError Opening pipe...returning\n\n");
+        printf("Error Opening Pipe: Returning");
         return 1;
     }
 
+    int id;
     id = fork();                                            // clone & allocate new memory to an identical child process and run it
     if(id == -1)
     {
@@ -40,7 +38,7 @@ int main(int argc, char* argv[])
         int x;
         printf("Input a number: ");
         scanf("%d", &x);
-        // x = x * 3;                                       // operate on data before it is sent to the pipe
+        // x = x * x;                                          // (x^2) operate on data before it is sent to the pipe (OPTIONAL)
         if(write(fd[1], &x, sizeof(int)) == -1)
         {
             printf("ERROR Writing to the pipe...returning");
@@ -57,7 +55,7 @@ int main(int argc, char* argv[])
             printf("Error Reading from the pipe...returning");
             return 3;
         }
-        // y = y * 3;                                       // perform data operation before printing to screen.
+        // y = y * 3;                                       // (3y) perform data operation before printing to screen (OPTIONAL).
         close(fd[0]);                                       // Close reading end when done.
         printf("Rec'd from child process: %d\n", y);
     }
