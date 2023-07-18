@@ -4,6 +4,11 @@
  * Tutorial: Unix Processes in C.
  * Part 7: Practical Use Case for fork() & pipe() in C.
  * 
+ *  This is a simple use case for multiple processes: To break up a task (like multiple repetitious additions)
+ *  into multiple tasks (to take advantage of multicore processors). At the end, both partial sums are added
+ *  by one process writing its partial sum to a pipeline, the other process reads that partial sum from the pipeline,
+ *  adds it to its own partial sum, and output the Total Sum ONLY ONCE.
+ * 
 */
 
 #include <stdio.h>
@@ -11,60 +16,76 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <errno.h>                                          // errno & ECHILD macros
+#include <errno.h>                                                              // errno & ECHILD macros
 
 int main(int argc, char* argv[])
 {
-    int fd[2];                                              // fd[0] = read, fd[1] = write;
-    if(pipe(fd) == -1)
+    int arr[] = {1, 2, 3, 4, 1, 2, 7, 7};
+    int arrSize = sizeof(arr) / sizeof(int);                                    // Result is an integer.
+    int start, end;
+
+    int fd[2];                                                                  // fd[0] = read, fd[1] = write;
+    if(pipe(fd) == -1)                                                          // Error Handling
     {
         printf("Error Opening Pipe: Returning\n");
         return 1;
     }
 
     int id;
-    id = fork();                                            // clone & allocate new memory to an identical child process and run it
-    if(id == -1)
+    id = fork();                                                                // clone & allocate new memory to an identical child process and run it
+    if(id == -1)                                                                // Error Handling
     {
         printf("An Error Occurred With The Fork...\n");
-        return 4;
+        return 2;
     }
     
-    if(id == 0)                                             // CHILD process: WRITE to pipe.
+    if(id == 0)                                                                 // CHILD process: counts lower partial sum: 0 to (arrSize / 2)
     {
-        close(fd[0]);                                       // Close reading end of pipe (we aren't using it);
-        int x;
-        printf("Input a number: ");
-        scanf("%d", &x);
-        // x = x * x;                                       // (x^2) operate on data before it is sent to the pipe (OPTIONAL)
-        if(write(fd[1], &x, sizeof(int)) == -1)
-        {
-            printf("ERROR Writing to the pipe...returning\n");
-            return 2;
-        }
-        close(fd[1]);                                       // Close writing end when finished writing.
-        printf("Child Sent %d to the pipe\n", x);
+        start = 0;
+        end = start + (arrSize / 2);                                            // Integer division: result = floor(result);
+
     }
-    else                                                    // Parent Process: READ from pipe
+    else                                                                        // Parent Process: counts upper partial sum: from (arrSize / 2) to arrSize.
     {
-        close(fd[1]);                                       // Close write end: Not using it.
-        int y;
-        printf("Parent Process Waiting...\n");
-        wait(NULL);                                         // Wait for child process to finish w/ User Input
-        
-        if(read(fd[0], &y, sizeof(int)) == -1)
-        {
-            printf("Error Reading from the pipe...returning\n");
-            return 3;
-        }
-        // y = y * 3;                                       // (3y) perform data operation before printing to screen (OPTIONAL).
-        close(fd[0]);                                       // Close reading end when done.
-        printf("Main Process rec'd from child process: %d\n", y);
+        start = arrSize / 2;
+        end = arrSize;
+    }
+    
+    int i;
+    int sum = 0;
+    for(i = start; i < end; i++)                                                // Calculate partial sums in each process
+    {
+        sum += arr[i];
     }
 
-    if(id != 0)                                             // Main process
+    if(id == 0)
     {
-        printf("\n\n");
+        printf("Process %d calculated partial sum %d\n", getpid(), sum);        // debug
+        close(fd[0]);                                                           // Close READ: not using it
+        if(write(fd[1], &sum, sizeof(sum)) == -1)
+        {
+            printf("An Error Occurred Writing to the Pipe...\n");
+            return 3;
+        }
+        close((fd[1]));                                                         // Close WRITE when finished.
+    }
+    else // parent
+    {
+        printf("\n\nProcess %d calculated partial sum %d\n", getpid(), sum);    // debug
+        close(fd[1]);                                                           // Close WRITE: not using it.
+        wait(NULL);                                                             // wait for child process to finish
+        
+        int sumFromChild;
+        if(read(fd[0], &sumFromChild, sizeof(sumFromChild)))
+        {
+            printf("An Error Occurred Reading the pipe...\n");
+            return 4;  
+        }
+        close(fd[0]);                                                           // Close READ when done.
+
+        int totalSum;
+        totalSum = sum + sumFromChild;                                          // Claculate Total sum
+        printf("Total sum is %d\n\n\n", totalSum);
     }
 
     return 0;
