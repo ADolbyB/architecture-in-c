@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
     int fd[2];                                              // fd[0] = read, fd[1] = write;
     if(pipe(fd) == -1)
     {
-        printf("Error Opening Pipe: Returning");
+        printf("Error Opening Pipe: Returning\n");
         return 1;
     }
 
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     id = fork();                                            // clone & allocate new memory to an identical child process and run it
     if(id == -1)
     {
-        printf("An Error Occurred With The Fork...");
+        printf("An Error Occurred With The Fork...\n");
         return 4;
     }
     
@@ -38,26 +38,30 @@ int main(int argc, char* argv[])
         int x;
         printf("Input a number: ");
         scanf("%d", &x);
-        // x = x * x;                                          // (x^2) operate on data before it is sent to the pipe (OPTIONAL)
+        // x = x * x;                                       // (x^2) operate on data before it is sent to the pipe (OPTIONAL)
         if(write(fd[1], &x, sizeof(int)) == -1)
         {
-            printf("ERROR Writing to the pipe...returning");
+            printf("ERROR Writing to the pipe...returning\n");
             return 2;
         }
         close(fd[1]);                                       // Close writing end when finished writing.
+        printf("Child Sent %d to the pipe\n", x);
     }
     else                                                    // Parent Process: READ from pipe
     {
         close(fd[1]);                                       // Close write end: Not using it.
         int y;
+        printf("Parent Process Waiting...\n");
+        wait(NULL);                                         // Wait for child process to finish w/ User Input
+        
         if(read(fd[0], &y, sizeof(int)) == -1)
         {
-            printf("Error Reading from the pipe...returning");
+            printf("Error Reading from the pipe...returning\n");
             return 3;
         }
         // y = y * 3;                                       // (3y) perform data operation before printing to screen (OPTIONAL).
         close(fd[0]);                                       // Close reading end when done.
-        printf("Rec'd from child process: %d\n", y);
+        printf("Main Process rec'd from child process: %d\n", y);
     }
 
     if(id != 0)                                             // Main process
