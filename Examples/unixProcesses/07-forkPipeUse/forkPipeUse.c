@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <errno.h>                                                              // errno & ECHILD macros
 
 int main(int argc, char* argv[])
 {
