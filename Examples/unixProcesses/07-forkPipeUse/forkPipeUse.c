@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
 
     if(id == 0)
     {
-        printf("Process %d calculated partial sum %d\n", getpid(), sum);        // debug
+        printf("Process %d calculated partial sum: %d\n", getpid(), sum);       // debug
         close(fd[0]);                                                           // Close READ: not using it
         if(write(fd[1], &sum, sizeof(sum)) == -1)
         {
@@ -71,12 +71,12 @@ int main(int argc, char* argv[])
     }
     else // parent
     {
-        printf("\n\nProcess %d calculated partial sum %d\n", getpid(), sum);    // debug
+        printf("\n\nProcess %d calculated partial sum: %d\n", getpid(), sum);   // debug
         close(fd[1]);                                                           // Close WRITE: not using it.
         wait(NULL);                                                             // wait for child process to finish
         
         int sumFromChild;
-        if(read(fd[0], &sumFromChild, sizeof(sumFromChild)))
+        if(read(fd[0], &sumFromChild, sizeof(sumFromChild)) == -1)
         {
             printf("An Error Occurred Reading the pipe...\n");
             return 4;  
@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
 
         int totalSum;
         totalSum = sum + sumFromChild;                                          // Claculate Total sum
-        printf("Total sum is %d\n\n\n", totalSum);
+        printf("Total sum = %d\n\n\n", totalSum);
     }
 
     return 0;
