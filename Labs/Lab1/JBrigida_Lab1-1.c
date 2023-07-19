@@ -2,7 +2,7 @@
  * Joel Brigida
  * CDA4102: Computer Architecture
  * July 13, 2023
- * Pref. BAssem Alhalabi
+ * Pref. Bassem Alhalabi
  * Lab 1-1:
  *      Write a C program that:
  *      - prompts the user for: name, age, and salary of 3 employees.
@@ -22,20 +22,15 @@ int main()
     double salary[3];
 
     for(i = 0; i < 3; i++)  
-    {
-        // prompt the to enter age
-        // scan user’s input
-        // prompt the to enter salary
-        // scan user’s input
-        
-        printf("Enter the name of employee %d: ", i + 1);                           // prompt the to enter name
-        scanf("%s", &name[i]);                                                       // scan user’s input
+    {        
+        printf("Enter the name of employee %d (no spaces): ", i + 1);               // prompt the to enter name
+        scanf("%s", *&name[i]);                                                     // scan user’s input
         
         printf("Enter the age of employee %d: ", i + 1);                            // prompt the to enter name
-        scanf("%d", &age[i]);                                                        // scan user’s input
+        scanf("%d", &age[i]);                                                       // scan user’s input
 
         printf("Enter the salary of employee %d: ", i + 1);                         // prompt the to enter name
-        scanf("%lf", &salary[i]);                                                    // scan user’s input
+        scanf("%lf", &salary[i]);                                                   // scan user’s input
 
         printf("\n");                                                               // a new line
     }
@@ -44,7 +39,7 @@ int main()
     {
         // print Prints information (name, age, salary) of each employee in a separate line 
 
-        printf("The name of employee %d is: %s. They are %d years old, and their salary is $%.2f.\n",  j+1, name[j], age[j], salary[j]); 
+        printf("The name of employee %d is %s. %s is %d years old, and their salary is $%.2f.\n",  j+1, name[j], name[j], age[j], salary[j]); 
     }
 
     return 0;
