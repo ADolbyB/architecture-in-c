@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
         sum += arr[i];
     }
 
-    if(id == 0)
+    if(id == 0)                                                                 // Child Process
     {
         printf("Process %d calculated partial sum: %d\n", getpid(), sum);       // debug
         close(fd[0]);                                                           // Close READ: not using it
@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
         }
         close((fd[1]));                                                         // Close WRITE when finished.
     }
-    else // parent
+    else // parent                                                              // Parent Process
     {
         printf("\n\nProcess %d calculated partial sum: %d\n", getpid(), sum);   // debug
         close(fd[1]);                                                           // Close WRITE: not using it.
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
         close(fd[0]);                                                           // Close READ when done.
 
         int totalSum;
-        totalSum = sum + sumFromChild;                                          // Claculate Total sum
+        totalSum = sum + sumFromChild;                                          // Calculate Total sum
         printf("Total sum = %d\n\n\n", totalSum);
     }
 
