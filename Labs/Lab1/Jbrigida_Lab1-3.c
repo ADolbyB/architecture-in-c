@@ -21,13 +21,13 @@ int main()
     char temp[50];
 
     printf("\n\nEnter The First Name (No Spaces): ");
-    scanf("%s", *&name1);
+    scanf("%s", *&name1);                                               // scanf() does not read whitespace characters or anything after them
 
     int ch;     // https://stackoverflow.com/questions/44943622/getchar-function-to-clear-input-buffer-outside-of-while-condition
     while((ch = getchar()) != EOF && ch != '\n');                       // Clear Input Buffer Before Second Name Entered.
 
     printf("Enter The Second Name (No Spaces): ");
-    scanf("%s", *&name2);                                               // scanf() does not retreive blank characters.
+    scanf("%s", *&name2);                                               
 
     printf("\n\nFirst Name \'name1\': %s\n", name1);
     printf("Second Namd \'name2\': %s\n\n", name2);
