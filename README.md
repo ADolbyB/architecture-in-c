@@ -13,8 +13,9 @@ Another good book for Computer Architecture is: [Structured Computer Organizatio
  - This book is more about hardware and does not include programming.
 
 [C Language Placeholders](https://en.m.wikibooks.org/wiki/C_Programming/Simple_input_and_output) List and examples of usage.
- - Remember that `scanf()` is vulnerable to buffer overflow, to use `fgets()` instead, as discussed in the article
- 
+ - Remember that `scanf()` is vulnerable to buffer overflow, to use `fgets()` instead, as discussed in the article.
+ - Remember in C: DON'T FORGET TO CLEAR THAT INPUT BUFFER: [Stack Overflow](https://stackoverflow.com/questions/44943622/getchar-function-to-clear-input-buffer-outside-of-while-condition)
+
 C File Handling:
 
  - Reference for [C File Handling](https://www.w3schools.blog/c-file-handling) with examples.
