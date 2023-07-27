@@ -21,6 +21,7 @@ C File Handling:
  - Reference for [C File Handling](https://www.w3schools.blog/c-file-handling) with examples.
  - [C File Handling](https://www.w3schools.in/c-programming/file-handling) examples.
  - [C Files](https://www.w3schools.com/c/c_files.php) from W3 Schools.
+ - [C Program to Copy One File to Another File](https://www.sanfoundry.com/c-program-copy-file/)
 
 ## Status:
 
