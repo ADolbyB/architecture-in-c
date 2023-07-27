@@ -24,7 +24,7 @@
 int main()
 {
     FILE *inputFile = fopen("input.txt", "r");
-    FILE *outputFile = fopen("output.txt", "w");
+    FILE *outputFile = fopen("output.txt", "a");
 
     printf("\n\nFILE pointers created\n");
 
@@ -59,7 +59,7 @@ int main()
     printf("Both Pipes Created...\n");
     
     int childA, childB;                                                         // Declare both PIDs
-    
+
     childA = fork();                                                            // Fork first child (2nd Process)
     if(childA == 0)
     {
@@ -73,6 +73,7 @@ int main()
         char c;
         while(read(pipe1[0], &c, 1) > 0)
         {
+            printf("Inside 1st Child While Loop (Read Pipe 1)\n");
             if(islower(c))                                                      // Perform lowercase to uppercase
             {
                 c = toupper(c);
@@ -87,8 +88,12 @@ int main()
                 printf("Error Writing to pipe2[1]...\n");
                 return 4;
             }
+            else
+            {
+                printf("Successfully wrote to pipe2\n");
+            }
         }
-        printf("Data Written To \'pipe2\' Sucessfully\n");
+        printf("Data Written To \'pipe2\' Successfully\n");
         close(pipe1[0]);                                                        // Close remaining pipes
         close(pipe2[1]);
     }
@@ -107,10 +112,10 @@ int main()
             close(pipe2[1]);
             printf("Child B closed pipe2[1]\n");
             char c;
-            while(read(pipe2[0], &c, 1) > 0)
+            while(read(pipe2[0], &c, 1) > 0)                                    // Read from pipe2
             {
                 // output to file
-                printf("Inside 2nd Child While Loop\n");
+                printf("Inside 2nd Child While Loop (Print To Output)\n");
                 fprintf(outputFile, "%c", c);
             }
             close(pipe2[0]);                                                    // Close unused pipes
@@ -125,15 +130,19 @@ int main()
             close(pipe1[0]);
             close(pipe2[0]);
             char d;
-            while(fscanf(inputFile, "%c", &d) == 1)
+            while(fscanf(inputFile, "%c", &d) == 1)                             // read from inputFile
             {
                 if(write(pipe1[1], &d, sizeof(d)) == -1)                        // write to pipe1
                 {
-                    printf("Error Writing to pipe1[1]...\n");
+                    printf("Error Writing to \'pipe1[1]\'...\n");
                     return 4;
                 }
+                else
+                {
+                    printf("Successfully wrote to pipe1\n");
+                }
             }
-            printf("Data Written to \'pipe1\' Sucessfully\n");
+            printf("Data Written to \'pipe1\' Successfully\n");
             close(pipe1[1]);
             fclose(inputFile);
             wait(NULL);
