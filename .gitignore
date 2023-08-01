@@ -7,4 +7,17 @@
 # Unignore all directories:
 !*/
 
+# Files:
+# Object Files:
+*.o
+
+# Project Files
+*.cbp
+
+# Layout Files
+*.layout
+
+# Folders:
 .vscode/
+bin/
+obj/
