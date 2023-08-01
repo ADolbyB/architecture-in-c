@@ -23,6 +23,10 @@ C File Handling:
  - [C Files](https://www.w3schools.com/c/c_files.php) from W3 Schools.
  - [C Program to Copy One File to Another File](https://www.sanfoundry.com/c-program-copy-file/)
 
+GDB Debugging:
+
+ - [Low Level Learning](https://www.youtube.com/watch?v=Dq8l1_-QgAc): An Excellent GDB Walkthrough Example.
+
 ## Status:
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/ADolbyB/architecture-in-c?label=Repo%20Size&logo=Github)
