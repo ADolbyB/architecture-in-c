@@ -26,6 +26,7 @@ C File Handling:
 GDB Debugging:
 
  - [Low Level Learning](https://www.youtube.com/watch?v=Dq8l1_-QgAc): An Excellent GDB Walkthrough Example.
+ - [GDB MasterClass](https://www.youtube.com/watch?v=MTkDTjdDP3c) by Mike Shah.
 
 ## Status:
 
