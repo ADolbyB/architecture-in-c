@@ -4,6 +4,7 @@
  * 
  * This is a tutorial on GDB Debugger.
  * Reference: https://www.youtube.com/watch?v=Dq8l1_-QgAc
+ * Ref: https://www.youtube.com/watch?v=MTkDTjdDP3c
  * 
  * command format:
  * `gcc -o [Binary fileName] [Source.c filename] -g`
