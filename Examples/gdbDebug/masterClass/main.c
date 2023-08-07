@@ -7,7 +7,10 @@
  * 
  * bash command format:
  * `gcc -o [Binary fileName] [Source.c filename] -g`
- * `gcc -o main main.c -g
+ * `gcc -o main main.c -g'
+ * 
+ * To debug & enable all warnings at compilation time:
+ * `gcc -g -Wall -Werror main.c -o main`
  * 
  * other useful bash commands:
  * `wc -c [Binary fileName]`        // shows size of binary file
@@ -17,12 +20,18 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 
 int main(int argc, char *argv[])
 {
     char *name = "Joel";
+    char *name2 = "Brigida";
 
     printf("My Name Is: %s\n\n", name);
+
+    name = name2;
+
+    printf("My Name Is: %s\n\n", name2);
 
     return 0;
 }
