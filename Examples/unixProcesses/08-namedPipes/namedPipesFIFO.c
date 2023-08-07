@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     printf("FIFO Created...Opening...\n");
 
     int fd;
-    fd = open("myfifo1", O_WRONLY);
+    fd = open("myfifo1", O_WRONLY);                 // O_WRONLY: Write Only, O_RDONLY: Read Only, O_RDWR: Read / Write
     if(fd < 0)
     {
         printf("Could Not Open Pipe...Exiting");
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
         printf("FIFO Opened...\n");
     }
 
-    int x = 97;                                 // Any value that != NULL to send over FIFO
+    int x = 97;                                     // Any value that != NULL to send over FIFO
     int retval2 = 0;
     
     retval2 = write(fd, &x, sizeof(x));
