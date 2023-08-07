@@ -146,7 +146,7 @@ int main()
             close(pipe1[1]);
             fclose(inputFile);
             wait(NULL);
-            wait(NULL);
+            // wait(NULL); Program Hangs If 2nd wait(NULL) is present.
             // close unused pipes
             // close input file
         }
