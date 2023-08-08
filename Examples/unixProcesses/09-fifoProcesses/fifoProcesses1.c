@@ -29,13 +29,14 @@ int main(int argc, char *argv[])
     srand(time(NULL));
     int myArray[5] = { 0 };
 
-    int i;
     int someRand = 0;
     int randomGenerated = 0;
+    int i;
     for(i = 0; i < 5; i++)
     {
         someRand = rand();
         randomGenerated = someRand % 100;
+        printf("Generated %d\n", randomGenerated);
         myArray[i] = randomGenerated;
     }
 
@@ -47,18 +48,20 @@ int main(int argc, char *argv[])
         return 1;
     }
     
+    int writeVal = 0;
+    writeVal = write(fd, myArray, sizeof(int) * 5);             // Write all 5 array indices at the same time (eliminates the for() loop)
+    if(writeVal == -1)
+    {
+        printf("Error Writing To FIFO...Exiting...\n");
+        return 2;
+    }
+
     int j;
-    int writeVal;
     for(j = 0; j < 5; j++)
     {
-        writeVal = write(fd, &myArray[j], sizeof(int));
-        if(writeVal == -1)
-        {
-            printf("Error Writing To FIFO...Exiting...\n");
-            return 2;
-        }
-        printf("Wrote: %d \n", myArray[j]);
+        printf("Wrote: %d \n", myArray[j]);                     // Verify data was written properly
     }
+    
     close(fd);
     printf("Writing Closed: Task Finished\n");
 

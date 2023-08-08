@@ -48,6 +48,20 @@ int main(int argc, char *argv[])
         }
         printf("Received From FIFO: %d\n", thisArray[i]);
     }
+
+    /* Alternative way to read and eliminate for() loop 
+    
+    readval = read(fd, thisArray, sizeof(int) * 5)      // Read all 5 array indices at the same time.
+    if(readVal == -1)
+    {
+        printf("Error Reading From FIFO...Exiting...\n");
+        return 2;
+    }
+    // Note that we have to iterate through the array to display values,
+    // which defeats the purpose of eliminating the for() loop in the 1st place
+    
+    */
+
     close(fd);
     printf("Reading Closed: Performing Sum Operation...\n");
 
