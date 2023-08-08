@@ -10,7 +10,10 @@
  * Going back to the original terminal where ./namedPipesFIFO was executed, and we see that the
  * process has finished.
  * 
- * Compile binary w/ debug & all warnings 
+ * Make a FIFO named 'sum':
+ * `mkfifo sum`
+ * 
+ * Compile binary w/ debug symbols & all warnings:
  * gcc -g -Wall -Werror namedPipesFIFO.c -o namedPipesFIFO
  * 
  */
@@ -45,7 +48,7 @@ int main(int argc, char *argv[])
     fd = open("myfifo1", O_WRONLY);                 // O_WRONLY: Write Only, O_RDONLY: Read Only, O_RDWR: Read / Write
     if(fd < 0)
     {
-        printf("Could Not Open Pipe...Exiting");
+        printf("Could Not Open Pipe...Exiting...");
         return 3;
     }
     else
@@ -53,7 +56,7 @@ int main(int argc, char *argv[])
         printf("FIFO Opened...\n");
     }
 
-    int x = 97;                                     // Any value that != NULL to send over FIFO
+    int x = 97;                                     // Any value that != NULL to send over FIFO. ASCII 97 = 'a'. 
     int retval2 = 0;
     
     retval2 = write(fd, &x, sizeof(x));
@@ -67,7 +70,7 @@ int main(int argc, char *argv[])
 
     close(fd);
 
-    printf("FIFO Closed...Exiting\n");
+    printf("FIFO Closed...Exiting...\n");
 
     return 0;
 }
