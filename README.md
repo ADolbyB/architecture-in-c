@@ -64,7 +64,7 @@ delete                                  # Delete all breakpoints
 delete breakpoint_no                    # Delete breakpoint breakpoint_no
 disable                                 # Disable all breakpoints
 make binaryName                         # recompile binaryName (useful to test after 'p var = value' changes)
-layout type	                            # Set the window layout ("src", "asm", "split", or "reg")
+layout type                             # Set the window layout ("src", "asm", "split", or "reg")
 tui reg type                            # Set the register window layout ("general", "float", "system", or "next")
 lay next                                # Cycle through the layouts of gdb
 tui disable                             # Disable TUI display mode.
